@@ -46,10 +46,12 @@ async function compareTexts() {
         return phrases;
     }
 
-    // Function to count phrase occurrences within a text
-    function getPhraseOccurrences(words) {
+    // Function to find repeated phrases within a text (excluding matches)
+    function getPhraseOccurrences(words, otherPhrases) {
         const occurrences = [];
         const maxLength = Math.min(words.length, MAX_PHRASE_LENGTH);
+        const otherPhraseSet = new Set(otherPhrases.map(p => p.text));
+
         for (let i = 3; i <= maxLength; i++) {
             const phraseMap = new Map();
             for (let j = 0; j <= words.length - i; j++) {
@@ -59,9 +61,9 @@ async function compareTexts() {
                 }
                 phraseMap.get(phrase).push({ start: j, length: i });
             }
-            // Only include phrases that appear more than once
+            // Include phrases that appear more than once and are not in the other text
             for (let [phrase, positions] of phraseMap) {
-                if (positions.length > 1) {
+                if (positions.length > 1 && !otherPhraseSet.has(phrase)) {
                     occurrences.push({ text: phrase, positions });
                 }
             }
@@ -73,8 +75,8 @@ async function compareTexts() {
     await new Promise(resolve => setTimeout(resolve, 0));
     const phrases1 = getPhrases(words1);
     const phrases2 = getPhrases(words2);
-    const repeats1 = getPhraseOccurrences(words1);
-    const repeats2 = getPhraseOccurrences(words2);
+    const repeats1 = getPhraseOccurrences(words1, phrases2);
+    const repeats2 = getPhraseOccurrences(words2, phrases1);
 
     // Find matching phrases between texts
     const matches = [];
@@ -86,8 +88,10 @@ async function compareTexts() {
         });
     });
 
-    // Sort matches by length (descending)
+    // Sort matches and repeats by length (descending) to prioritize longer phrases
     matches.sort((a, b) => b.length - a.length);
+    repeats1.sort((a, b) => b.positions[0].length - a.positions[0].length);
+    repeats2.sort((a, b) => b.positions[0].length - a.positions[0].length);
 
     // Highlight matches and repeats in a text
     function highlightText(words, matches, repeats, startKey, originalText) {
@@ -99,15 +103,7 @@ async function compareTexts() {
             const start = match[startKey];
             const end = start + match.length;
 
-            let isCovered = false;
-            for (let i = start; i < end; i++) {
-                if (covered.has(i)) {
-                    isCovered = true;
-                    break;
-                }
-            }
-
-            if (!isCovered) {
+            if (!isCovered(covered, start, end)) {
                 for (let i = start; i < end; i++) {
                     covered.add(i);
                 }
@@ -124,15 +120,7 @@ async function compareTexts() {
                 const start = pos.start;
                 const end = start + pos.length;
 
-                let isCovered = false;
-                for (let i = start; i < end; i++) {
-                    if (covered.has(i)) {
-                        isCovered = true;
-                        break;
-                    }
-                }
-
-                if (!isCovered) {
+                if (!isCovered(covered, start, end)) {
                     for (let i = start; i < end; i++) {
                         covered.add(i);
                     }
@@ -143,6 +131,16 @@ async function compareTexts() {
                 }
             });
         });
+
+        // Helper function to check if a range is covered
+        function isCovered(covered, start, end) {
+            for (let i = start; i < end; i++) {
+                if (covered.has(i)) {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         // Use original text for display (preserves diacritics)
         return originalText.split(/[\s،]+/).filter(word => word !== '').map((word, i) => {
