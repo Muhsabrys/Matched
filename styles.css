@@ -112,20 +112,16 @@ button:hover {
     direction: auto;
 }
 
-.highlight {
-    background-color: #ffeb3b;
+.highlight-match {
+    background-color: #ffeb3b; /* Yellow for matches between texts */
     padding: 2px 4px;
     border-radius: 3px;
 }
 
-ul {
-    list-style: none;
-    padding: 0;
-}
-
-ul li {
-    margin: 5px 0;
-    font-size: 14px;
+.highlight-repeat {
+    background-color: #ffa500; /* Orange for repeated phrases within a text */
+    padding: 2px 4px;
+    border-radius: 3px;
 }
 
 @media (max-width: 768px) {
