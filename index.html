@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Text Matcher</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    .editable-box {
+      border: 1px solid #ccc;
+      padding: 10px;
+      width: 45%;
+      height: 200px;
+      overflow-y: auto;
+      display: inline-block;
+      vertical-align: top;
+      margin: 10px;
+      white-space: pre-wrap;
+    }
+    .highlight {
+      background-color: yellow;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Text Matcher</h2>
+  <div id="text1" class="editable-box" contenteditable="true"></div>
+  <div id="text2" class="editable-box" contenteditable="true"></div>
+  <br><br>
+  <button onclick="highlightMatches()">Highlight Matching Sentences</button>
+
+  <script src="matcher.js"></script>
+</body>
+</html>
