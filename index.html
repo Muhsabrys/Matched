@@ -3,33 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Text Comparison Tool</title>
+    <title>Text Comparison Tool (English & Arabic)</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <h1>Text Comparison Tool</h1>
-        <p>Enter two texts below to highlight matching phrases (three words or more).</p>
+        <p>Enter two texts (English or Arabic) to highlight matching phrases (three words or more).</p>
+        <div id="progress" class="progress" style="display: none;">Processing...</div>
         <div class="input-section">
             <div class="text-box">
-                <label for="text1">Text 1</label>
-                <textarea id="text1" rows="10" placeholder="Enter first text..."></textarea>
+                <label for="text1">Text 1 (النص الأول)</label>
+                <textarea id="text1" rows="10" placeholder="Enter first text (أدخل النص الأول)..."></textarea>
             </div>
             <div class="text-box">
-                <label for="text2">Text 2</label>
-                <textarea id="text2" rows="10" placeholder="Enter second text..."></textarea>
+                <label for="text2">Text 2 (النص الثاني)</label>
+                <textarea id="text2" rows="10" placeholder="Enter second text (أدخل النص الثاني)..."></textarea>
             </div>
         </div>
-        <button onclick="compareTexts()">Compare Texts</button>
+        <button onclick="compareTexts()">Compare Texts (مقارنة النصوص)</button>
         <div class="output-section">
-            <h2>Results</h2>
+            <h2>Results (النتائج)</h2>
             <div class="output-box">
-                <h3>Text 1</h3>
-                <div id="output1"></div>
+                <h3>Text 1 (النص الأول)</h3>
+                <div id="output1" dir="auto"></div>
             </div>
             <div class="output-box">
-                <h3>Text 2</h3>
-                <div id="output2"></div>
+                <h3>Text 2 (النص الثاني)</h3>
+                <div id="output2" dir="auto"></div>
             </div>
         </div>
     </div>
