@@ -1,8 +1,9 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 20px;
     background-color: #f4f4f4;
+    direction: ltr; /* Default to LTR, overridden by dir="auto" where needed */
 }
 
 .container {
@@ -24,6 +25,13 @@ p {
     color: #666;
 }
 
+.progress {
+    text-align: center;
+    color: #007bff;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
 .input-section {
     display: flex;
     gap: 20px;
@@ -41,6 +49,7 @@ textarea {
     border-radius: 4px;
     resize: vertical;
     font-size: 16px;
+    font-family: Arial, 'Traditional Arabic', sans-serif; /* Support Arabic fonts */
 }
 
 button {
@@ -71,6 +80,11 @@ button:hover {
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: #f9f9f9;
+}
+
+.output-box [dir="auto"] {
+    direction: auto; /* Adjust direction based on content */
+    text-align: justify;
 }
 
 .highlight {
