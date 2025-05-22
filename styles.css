@@ -1,9 +1,8 @@
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, 'Noto Sans Arabic', sans-serif;
     margin: 0;
     padding: 20px;
     background-color: #f4f4f4;
-    direction: ltr; /* Default to LTR, overridden by dir="auto" where needed */
 }
 
 .container {
@@ -23,6 +22,20 @@ h1 {
 p {
     text-align: center;
     color: #666;
+}
+
+.direction-toggle {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.direction-toggle label {
+    margin-right: 10px;
+}
+
+.direction-toggle select {
+    padding: 5px;
+    font-size: 16px;
 }
 
 .progress {
@@ -49,7 +62,7 @@ textarea {
     border-radius: 4px;
     resize: vertical;
     font-size: 16px;
-    font-family: Arial, 'Traditional Arabic', sans-serif; /* Support Arabic fonts */
+    font-family: Arial, 'Noto Sans Arabic', sans-serif;
 }
 
 button {
@@ -82,15 +95,37 @@ button:hover {
     background-color: #f9f9f9;
 }
 
-.output-box [dir="auto"] {
-    direction: auto; /* Adjust direction based on content */
+.text-output {
     text-align: justify;
+    min-height: 100px;
+}
+
+.text-output.rtl {
+    direction: rtl;
+}
+
+.text-output.ltr {
+    direction: ltr;
+}
+
+.text-output.auto {
+    direction: auto;
 }
 
 .highlight {
     background-color: #ffeb3b;
     padding: 2px 4px;
     border-radius: 3px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    margin: 5px 0;
+    font-size: 14px;
 }
 
 @media (max-width: 768px) {
