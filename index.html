@@ -10,6 +10,14 @@
     <div class="container">
         <h1>Text Comparison Tool</h1>
         <p>Enter two texts (English or Arabic) to highlight matching phrases (three words or more).</p>
+        <div class="direction-toggle">
+            <label for="text-direction">Text Direction:</label>
+            <select id="text-direction" onchange="toggleDirection()">
+                <option value="auto">Auto</option>
+                <option value="rtl">RTL (Arabic)</option>
+                <option value="ltr">LTR (English)</option>
+            </select>
+        </div>
         <div id="progress" class="progress" style="display: none;">Processing...</div>
         <div class="input-section">
             <div class="text-box">
@@ -26,11 +34,15 @@
             <h2>Results (النتائج)</h2>
             <div class="output-box">
                 <h3>Text 1 (النص الأول)</h3>
-                <div id="output1" dir="auto"></div>
+                <div id="output1" class="text-output"></div>
+                <h4>Frequency List</h4>
+                <ul id="freq1"></ul>
             </div>
             <div class="output-box">
                 <h3>Text 2 (النص الثاني)</h3>
-                <div id="output2" dir="auto"></div>
+                <div id="output2" class="text-output"></div>
+                <h4>Frequency List</h4>
+                <ul id="freq2"></ul>
             </div>
         </div>
     </div>
